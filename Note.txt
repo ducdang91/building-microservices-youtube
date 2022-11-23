@@ -1,0 +1,42 @@
+go run main.go
+curl localhost:9090 | jq # Json format
+https://github.com/go-playground/validator
+https://github.com/Redocly/redoc
+https://github.com/go-openapi/runtime/tree/master/middleware
+Swagger: localhost:9090
+make generate_client
+    swagger generate client
+Ep9: CORS
+    https://medium.com/@baphemot/understanding-cors-18ad6b478e2b
+    https://medium.com/iocscan/cross-origin-resource-sharing-cors-65b536b361ae
+	ch := gohandlers.CORS(gohandlers.AllowedOrigins([]string{"http://xcoffee.com:3000"}))
+Ep10 File Handler
+    curl localhost:9090/images/1/test.png -d @test.png
+    rm -rf filestore
+    BASE_PATH=./filestore go run main.go
+    curl -v localhost:9090/images/1/test.png -o test2.png
+Ep11 Multi-Part requests
+    If the request Body's size has not already been limited by MaxBytesReader, the size is capped at 10MB. https://pkg.go.dev/net/http#Request.ParseForm 
+    http://localhost:3000/admin
+Ep12 Gzip
+    curl -v localhost:9091/images/1/holding.png --compressed -o test2.png
+    curl localhost:9091/images/1/test.png -d @test.png
+Ep13 gRPC Protocol Buffers
+    https://developers.google.com/protocol-buffers/docs/proto3
+    cd currency && go run main.go
+    https://github.com/fullstorydev/grpcurl
+    grpcurl --plaintext localhost:9092 list
+    grpcurl --plaintext localhost:9092 list Currency
+    grpcurl --plaintext localhost:9092 describe Currency.GetRate
+    grpcurl --plaintext localhost:9092 describe .RateRequest
+    grpcurl --plaintext -d '{"base": "GBP", "destination": "USD"}' localhost:9092 Currency.GetRate
+Ep14 gRPC client
+    curl localhost:9090/products/1
+Ep15 gRPC Exchange Rate 
+    https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml
+1.
+    go test -v ./data
+    debugger
+Ep16 gRPC bi-direction 
+     grpcurl --plaintext --msg-template -d @ localhost:9092 Currency/SubscribeRates
+
